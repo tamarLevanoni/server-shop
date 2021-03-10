@@ -4,7 +4,7 @@ const ProductPage = ({ match }) => {
   const [product, setProduct] = useState({});
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch(`http://127.0.0.1:8000/products/${match.params.id}`);
+      const response = await fetch(`/api/products/${match.params.id}`);
       const product = await response.json();
       console.log(product);
       setProduct(product);
