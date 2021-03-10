@@ -17,18 +17,18 @@ app.use(express.static(path.join(__dirname, "client/build")));
 
 mongoose.connect("mongodb+srv://shuki:12345@cluster0.7o9mm.mongodb.net/beta_shop?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true });
 app.use(express.json());
-// app.use(cors());
-var whitelist = ['http://localhost:3000', 'http://localhost:3001']
-var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
-app.use(cors(corsOptions));
+app.use(cors());
+// var whitelist = ['http://localhost:3000', 'http://localhost:3001']
+// var corsOptions = {
+//   origin: function (origin, callback) {
+//     if (whitelist.indexOf(origin) !== -1) {
+//       callback(null, true)
+//     } else {
+//       callback(new Error('Not allowed by CORS'))
+//     }
+//   }
+// }
+// app.use(cors(corsOptions));
 // const corsOptions = {
   //   origin: "http://localhost:3001",
   //   optionsSuccessStatus: 200, 
