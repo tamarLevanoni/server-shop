@@ -18,7 +18,7 @@ const Home = () => {
   }, []);
 
   async function fetchData() {
-    const response = await fetch("/api/products/");
+    const response = await fetch("/api/products");
     const products = await response.json();
     setProducts(products);
     console.log("sucsess");
