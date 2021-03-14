@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const path = require("path");
-
+require('dotenv').config();
 
 // const fs = require("fs");
 
@@ -14,25 +14,11 @@ const path = require("path");
 const app = express();
 
 app.use(express.static(path.join(__dirname, "client/build")));
-
-mongoose.connect("mongodb+srv://shuki:12345@cluster0.7o9mm.mongodb.net/beta_shop?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true });
+// app.use('/', express.static('client'));
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 app.use(express.json());
 app.use(cors());
-// var whitelist = ['http://localhost:3000', 'http://localhost:3001']
-// var corsOptions = {
-//   origin: function (origin, callback) {
-//     if (whitelist.indexOf(origin) !== -1) {
-//       callback(null, true)
-//     } else {
-//       callback(new Error('Not allowed by CORS'))
-//     }
-//   }
-// }
-// app.use(cors(corsOptions));
-// const corsOptions = {
-  //   origin: "http://localhost:3001",
-  //   optionsSuccessStatus: 200, 
-  // };
+
   
   const productSchema = new mongoose.Schema({
     title: String,
@@ -91,6 +77,6 @@ const port = process.env.PORT || 5000;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", function () {
   app.listen(port, () => {
-    console.log("Example app listening on port 5000!");
+    console.log(`Example app listening on port ${port}!`);
   });
 });
