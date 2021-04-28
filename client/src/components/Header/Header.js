@@ -21,7 +21,7 @@ const Header = (props) => {
           setSelectedPrices={props.setSelectedPrices}
         />
 
-        <div className="collection-sort">
+        {/* <div className="collection-sort">
           <label>Sort by:</label>
           <select>
             <option value="/">Featured</option>
@@ -33,7 +33,7 @@ const Header = (props) => {
             <option value="/">Date, new to old</option>
             <option value="/">Date, old to new</option>
           </select>
-        </div>
+        </div> */}
       </div>
     </nav>
   );

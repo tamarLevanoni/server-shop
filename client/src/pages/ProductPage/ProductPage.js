@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./ProductPage.css";
 const ProductPage = ({ match }) => {
   const [product, setProduct] = useState({});
+  const [wishList, setWishList] = useState({});
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(`/api/products/${match.params.id}`);
@@ -9,8 +10,24 @@ const ProductPage = ({ match }) => {
       console.log(product);
       setProduct(product);
     }
-   fetchData();
+    fetchData();
   }, [match.params.id]);
+  useEffect(() => {
+    setWishList(JSON.parse(localStorage.getItem("wishList")));
+  }, []);
+  useEffect(() => {
+    wishList && localStorage.setItem("wishList", JSON.stringify(wishList));
+  }, [wishList]);
+
+  function addToCart() {
+    setWishList({
+      ...wishList,
+      [product.id]: {
+        ...product,
+        count: wishList[product.id] ? wishList[product.id].count + 1 : 1,
+      },
+    });
+  }
 
   return (
     <section className="product">
@@ -28,7 +45,9 @@ const ProductPage = ({ match }) => {
         <div className="price">
           <span>{product.price}$</span>
         </div>
-        <button className="buy--btn">ADD TO CART</button>
+        <button className="buy--btn" onClick={addToCart}>
+          ADD TO CART
+        </button>
       </div>
     </section>
   );
