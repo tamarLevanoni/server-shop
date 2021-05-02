@@ -22,9 +22,9 @@ const ProductPage = ({ match }) => {
   function addToCart() {
     setWishList({
       ...wishList,
-      [product.id]: {
+      [product._id]: {
         ...product,
-        count: wishList[product.id] ? wishList[product.id].count + 1 : 1,
+        count: wishList[product._id] ? wishList[product._id].count + 1 : 1,
       },
     });
   }
